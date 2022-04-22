@@ -1,0 +1,12 @@
+pandas
+numpy
+matplotlib
+sklearn
+imblearn
+django
+django-crispy-forms
+djangorestframework
+markdown
+tensorflow
+seaborn
+ipykernel
