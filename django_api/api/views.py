@@ -1,3 +1,4 @@
+from operator import ne
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -29,12 +30,20 @@ def submitCandidature(request):
   try:
 
     mdl = load_model(
-        'F:\\Visconti\\DevProgram\\Tutorial\\Django\\MachineLearning\\DjangoAPI_MachineLearning\\machine_learning\\model')
+        'F:\\Visconti\\DevProgram\\Tutorial\\Django\\MachineLearning\\DjangoAPI_MachineLearning\\machine_learning\\model\\loan_model')
 
-    new_data = request.data   # Grab the input data from the request
+    # Grab the input data from the request, convert to DataFrame
+    df_data = pd.DataFrame(request.data, index=[0])
+    unit = scale_data(df_data)
 
-    print(type(new_data))
+    # Run model to predict
+    y_pred = mdl.predict(unit)
+    y_pred = (y_pred > 0.55)
 
-    return
+    new_df = pd.DataFrame(y_pred, columns=['Status'])
+    new_df = new_df.replace({True: 'Approved', False: 'Rejected'})
+
+    return JsonResponse('Your Status is {}'.format(new_df), safe=False)
+
   except ValueError as e:
     return Response(e.args[0], status.HTTP_400_BAD_REQUEST)
