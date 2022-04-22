@@ -5,7 +5,7 @@ import joblib
 
 import os
 
-path_parent = os.path.dirname(os.getcwd())
+path_parent = os.path.dirname(os.getcwd())  # Grab the previous path from the current directory
 path_model = (path_parent + '\\machine_learning\\model\\loan_model')
 path_scaler = (path_parent + '\\machine_learning\\model\\scaler.jbl')
 
