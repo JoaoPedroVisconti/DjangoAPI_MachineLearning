@@ -4,8 +4,8 @@ matplotlib
 sklearn
 imblearn
 django
-django-crispy-forms
 djangorestframework
+django-cors-headers
 markdown
 tensorflow
 seaborn
