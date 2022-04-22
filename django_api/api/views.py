@@ -1,4 +1,5 @@
 from operator import ne
+from re import S
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -31,6 +32,22 @@ def submitCandidature(request):
 
     data = request.data
     prediction = PrepData.submit_candidature(data)
+
+    # Candidature.objects.create(
+    #     Dependents=data['Dependents'],
+    #     ApplicantIncome=data['ApplicantIncome'],
+    #     CoapplicantIncome=data['CoapplicantIncome'],
+    #     LoanAmount=data['LoanAmount'],
+    #     Loan_Amount_Term=data['Loan_Amount_Term'],
+    #     Credit_History=data['Credit_History'],
+    #     Gender=data['Gender'],
+    #     Married=data['Married'],
+    #     Education=data['Education'],
+    #     Self_Employed=data['Self_Employed'],
+    #     Property_Area=data['Property_Area'],
+    # )
+
+    # serializer = CandidatureSerializers(candidature, many=False)
 
     return JsonResponse(prediction, safe=False)
 
